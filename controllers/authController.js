@@ -1,5 +1,15 @@
 import Player from "../models/player.js";
 
+const register = async (req, res) => {
+  try {
+    const player = new Player(req.body);
+    await player.save();
+    res.status(201).json(player);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
 const login = async (req, res) => {
   try {
     const player = await Player.findOne({
@@ -7,7 +17,7 @@ const login = async (req, res) => {
       password: req.body.password,
     });
     if (!player) {
-      res.status(404).json({ message: "Player not found" });
+      res.status(404).json({ message: "Usuario no encontrado" });
     } else {
       res.status(200).json(player._id);
     }
@@ -16,4 +26,4 @@ const login = async (req, res) => {
   }
 };
 
-export default { login };
+export default { register, login };

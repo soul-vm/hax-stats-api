@@ -47,4 +47,25 @@ const getStats = async (req, res) => {
   }
 };
 
-export default { getStats };
+const updatePlayerStat = async (req, res) => {
+  try {
+    const player = await Player.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { [`stats.${req.params.stat}`]: 1 } }, // Incremento dinámico
+      { new: true }
+    );
+
+    if (!player) {
+      return res.status(404).json({ message: "Jugador no encontrado" });
+    }
+
+    res.status(200).json(player);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default {
+  getStats,
+  updatePlayerStat,
+};

@@ -1,0 +1,22 @@
+meta {
+  name: updatePlayer
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:5100/players/67a5a1022dae73d370e5059c
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "stats": {
+      "goals": 8,
+      "assists": 2,
+      "wins": 4,
+      "losses": 1
+    }
+  }
+}
