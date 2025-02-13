@@ -9,4 +9,12 @@ router.post("/", playerController.createPlayer);
 router.put("/:id", playerController.updatePlayer);
 router.delete("/:id", playerController.deletePlayer);
 
+// Sumar goles y asistencias
+router.patch("/:id/goals", playerController.updatePlayerGoals);
+router.patch("/:id/assists", playerController.updatePlayerAssists);
+
+// Sumar victorias y derrotas
+router.patch("/:id/wins", playerController.updatePlayerWins);
+router.patch("/:id/losses", playerController.updatePlayerLosses);
+
 export default router;

@@ -52,10 +52,82 @@ const deletePlayer = async (req, res) => {
   }
 };
 
+const updatePlayerGoals = async (req, res) => {
+  try {
+    const player = await Player.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { "stats.goals": 1 } },
+      { new: true }
+    );
+    if (!player) {
+      res.status(404).json({ message: "Jugador no encontrado" });
+    } else {
+      res.status(200).json(player);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updatePlayerAssists = async (req, res) => {
+  try {
+    const player = await Player.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { "stats.assists": 1 } },
+      { new: true }
+    );
+    if (!player) {
+      res.status(404).json({ message: "Jugador no encontrado" });
+    } else {
+      res.status(200).json(player);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updatePlayerWins = async (req, res) => {
+  try {
+    const player = await Player.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { "stats.wins": 1 } },
+      { new: true }
+    );
+    if (!player) {
+      res.status(404).json({ message: "Jugador no encontrado" });
+    } else {
+      res.status(200).json(player);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updatePlayerLosses = async (req, res) => {
+  try {
+    const player = await Player.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { "stats.losses": 1 } },
+      { new: true }
+    );
+    if (!player) {
+      res.status(404).json({ message: "Jugador no encontrado" });
+    } else {
+      res.status(200).json(player);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export default {
   getPlayers,
   getPlayer,
   createPlayer,
   updatePlayer,
   deletePlayer,
+  updatePlayerGoals,
+  updatePlayerAssists,
+  updatePlayerWins,
+  updatePlayerLosses,
 };
