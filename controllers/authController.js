@@ -21,7 +21,11 @@ const register = async (req, res) => {
       avatar,
     });
     await player.save();
-    res.status(201).json({ message: "Jugador registrado correctamente" });
+    res.status(201).json({
+      message: "Jugador registrado correctamente",
+      playerId: player._id,
+      token: "acáVaElTokenJwt",
+    });
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
