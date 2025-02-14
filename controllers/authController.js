@@ -39,7 +39,11 @@ const login = async (req, res) => {
     if (!isMatch)
       return res.status(401).json({ message: "Credenciales incorrectas" });
 
-    res.status(200).json(player._id);
+    res.status(200).json({
+      message: "Login exitoso",
+      playerId: player._id,
+      token: "acáVaElTokenJwt",
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
