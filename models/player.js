@@ -9,7 +9,6 @@ const playerSchema = new mongoose.Schema({
   stats: {
     goals: { type: Number, default: 0 },
     assists: { type: Number, default: 0 },
-    played: { type: Number, default: 0 },
     wins: { type: Number, default: 0 },
     losses: { type: Number, default: 0 },
   },
