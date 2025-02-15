@@ -22,9 +22,14 @@ const register = async (req, res) => {
     });
     await player.save();
     res.status(201).json({
-      message: "Jugador registrado correctamente",
-      playerId: player._id,
-      token: "acáVaElTokenJwt",
+      message: "Te registraste en hax stats. Bienvenido!",
+      loginData: {
+        playerId: player._id,
+        nickname: player.nickname,
+        avatar: player.avatar,
+        country: player.country,
+        token: "acáVaElTokenJwt",
+      },
     });
   } catch (error) {
     res.status(409).json({ message: error.message });
