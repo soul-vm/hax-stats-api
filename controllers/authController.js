@@ -45,8 +45,13 @@ const login = async (req, res) => {
 
     res.status(200).json({
       message: "Login exitoso",
-      playerId: player._id,
-      token: "acáVaElTokenJwt",
+      loginData: {
+        playerId: player._id,
+        nickname: player.nickname,
+        avatar: player.avatar,
+        country: player.country,
+        token: "acáVaElTokenJwt",
+      },
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
