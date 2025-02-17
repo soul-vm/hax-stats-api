@@ -1,6 +1,6 @@
 import Player from "../models/player.js";
 
-const getPlayers = async (req, res) => {
+const getAllPlayers = async (req, res) => {
   try {
     const players = await Player.find();
     res.status(200).json(players);
@@ -9,7 +9,7 @@ const getPlayers = async (req, res) => {
   }
 };
 
-const getPlayer = async (req, res) => {
+const getPlayerById = async (req, res) => {
   try {
     const player = await Player.findById(req.params.id);
     res.status(200).json(player);
@@ -43,8 +43,8 @@ const deletePlayer = async (req, res) => {
 };
 
 export default {
-  getPlayers,
-  getPlayer,
+  getAllPlayers,
+  getPlayerById,
   updatePlayer,
   deletePlayer,
 };
