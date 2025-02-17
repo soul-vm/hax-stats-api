@@ -11,6 +11,9 @@ const playerSchema = new mongoose.Schema({
     assists: { type: Number, default: 0 },
     wins: { type: Number, default: 0 },
     losses: { type: Number, default: 0 },
+    mvp: { type: Number, default: 0 },
+    shutouts: { type: Number, default: 0 },
+    ownGoals: { type: Number, default: 0 },
   },
 });
 

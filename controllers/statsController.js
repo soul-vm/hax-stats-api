@@ -22,10 +22,42 @@ const getStats = async (req, res) => {
       .limit(10)
       .select("country nickname avatar stats.losses");
 
-    const topPlayed = await Player.find()
-      .sort({ "stats.played": -1 })
+    const topPlayed = await Player.aggregate([
+      {
+        $addFields: {
+          totalPlayed: { $add: ["$stats.wins", "$stats.losses"] },
+        },
+      },
+      {
+        $sort: { totalPlayed: -1 },
+      },
+      {
+        $limit: 10,
+      },
+      {
+        $project: {
+          country: 1,
+          nickname: 1,
+          avatar: 1,
+          totalPlayed: 1,
+        },
+      },
+    ]);
+
+    const topMvp = await Player.find()
+      .sort({ "stats.mvp": -1 })
       .limit(10)
-      .select("country nickname avatar stats.played");
+      .select("country nickname avatar stats.mvp");
+
+    const topShutouts = await Player.find()
+      .sort({ "stats.shutouts": -1 })
+      .limit(10)
+      .select("country nickname avatar stats.shutouts");
+
+    const topOwnGoals = await Player.find()
+      .sort({ "stats.ownGoals": -1 })
+      .limit(10)
+      .select("country nickname avatar stats.ownGoals");
 
     const transformData = (data) => {
       return data.map((item) => {
@@ -40,7 +72,10 @@ const getStats = async (req, res) => {
       topAssists: transformData(topAssists),
       topWins: transformData(topWins),
       topLosses: transformData(topLosses),
-      topPlayed: transformData(topPlayed),
+      topPlayed: topPlayed.map((item) => ({ ...item })),
+      topMvp: transformData(topMvp),
+      topShutouts: transformData(topShutouts),
+      topOwnGoals: transformData(topOwnGoals),
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
