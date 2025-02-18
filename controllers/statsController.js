@@ -94,7 +94,7 @@ const updatePlayerStat = async (req, res) => {
       return res.status(404).json({ message: "Jugador no encontrado" });
     }
 
-    res.status(200).json(player);
+    res.status(200).json({ message: "Estadística actualizada" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -36,7 +36,7 @@ const updatePlayer = async (req, res) => {
 const deletePlayer = async (req, res) => {
   try {
     await Player.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Player deleted successfully" });
+    res.status(200).json({ message: "Jugador eliminado" });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
