@@ -25,11 +25,11 @@ const getStats = async (req, res) => {
     const topPlayed = await Player.aggregate([
       {
         $addFields: {
-          totalPlayed: { $add: ["$stats.wins", "$stats.losses"] },
+          played: { $add: ["$stats.wins", "$stats.losses"] },
         },
       },
       {
-        $sort: { totalPlayed: -1 },
+        $sort: { played: -1 },
       },
       {
         $limit: 10,
@@ -39,7 +39,7 @@ const getStats = async (req, res) => {
           country: 1,
           nickname: 1,
           avatar: 1,
-          totalPlayed: 1,
+          played: 1,
         },
       },
     ]);
